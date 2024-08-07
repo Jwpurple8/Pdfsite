@@ -1,0 +1,101 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title></title>
+ <link rel="stylesheet" href="style.css">
+ <link href='https://unpkg.com/css.gg@2.0.0/icons/css/add-r.css' rel='stylesheet'>
+ <link href='https://unpkg.com/css.gg@2.0.0/icons/css/software-upload.css' rel='stylesheet'>
+</head>
+<body>
+  
+<div class="o"></div>
+
+  <div class="bingo">
+    <button class="amem1" onclick="updateHeading()">
+      <span class="span" ><i class="gg-add-r"></i></span>
+      <span class="span">titulo</span>
+     
+    </button>   <br>
+    
+    <button class="amem2" onclick="updateParagrafh()">
+        
+        <span class="span"><i class="gg-add-r"></i></span>
+        <span class="span">parágrafo</span>
+      
+    </button>
+    
+    <button class="amem"  id="generate-pdf"> 
+    
+    <span class="span"><i class="gg-software-upload"></i></span>
+      <span class="span">criar pdf</span>
+      </button>
+      
+  </div>
+  
+  <div class="bomba">
+    
+      <input type="text"id="1"placeholder="digite aqui o titulo">
+  
+  <input ="text" id="3" placeholder="escreva sua história">
+  </div>  
+  
+   <div class="textos">
+  
+     <h2 id="isso">=</h2>
+  
+     <p id="4"></p>
+   </div>
+   
+   
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/jspdf/2.5.1/jspdf.umd.min.js"></script>
+  
+  
+   <Script>
+   function updateHeading(){
+    const inputValue = document.getElementById("1").value;
+    document.getElementById("isso").innerText = inputValue;
+  }
+  
+  function updateParagrafh(){
+    const inputValue = document.getElementById("3").value;
+    document.getElementById("4").innerText = inputValue;
+  }console.log('Hello World!');
+  
+//para baixo foi gpt e eu estou tentando aprender o jspdf
+
+window.onload = function() {
+      document.getElementById('generate-pdf').addEventListener('click', () => {
+        const { jsPDF } = window.jspdf;
+        const doc = new jsPDF();
+
+        // Captura o conteúdo dos elementos <h2> e <p>
+        const h2 = document.querySelector('h2').innerText;
+        const paragraphs = document.querySelectorAll('p');
+
+        // Adiciona o conteúdo do <h2> ao PDF
+        doc.setFontSize(20);
+        doc.text(h2, 10, 20);
+
+        // Adiciona o conteúdo dos <p> ao PDF
+        doc.setFontSize(12);
+        let yPosition = 30;
+        paragraphs.forEach((p) => {
+          doc.text(p.innerText, 10, yPosition);
+          yPosition += 10; // Ajuste a posição y para cada parágrafo
+        });
+
+        // Salva o PDF
+        doc.save('documento.pdf');
+      });
+    }
+    
+   </Script>
+   
+  </div>
+
+</body>
+
+</html>
